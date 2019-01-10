@@ -16,7 +16,7 @@ include("laplace_coefficients_initialize.jl")
 laplace_coefficients_initialize(jmax::Integer,alpha::Number) = LaplaceCoefficients.initialize(jmax,alpha)
 export laplace_coefficients_initialize
 
-immutable Planet_plane
+struct Planet_plane
 # Parameters of a planet in a plane-parallel system
   # Mass ratio of the planet to the star:
   mass_ratio :: Float64
@@ -28,7 +28,7 @@ immutable Planet_plane
   omega    :: Float64
 end
 
-type Planet_plane_hk{T<:Number} # Parameters of a planet in a plane-parallel system
+mutable struct Planet_plane_hk{T<:Number} # Parameters of a planet in a plane-parallel system
   # Mass ratio of the planet to the star:
   mass_ratio :: T
   # Initial time of transit:
@@ -68,10 +68,10 @@ function compute_ttv!(jmax::Integer,p1::Planet_plane_hk,p2::Planet_plane_hk,time
 
 # Compute the semi-major axis ratio of the planets:
 # println(p1.period,p2.period)
-const alpha = (p1.period/p2.period)^(2//3)  # Julia supports rational numbers!
+alpha = (p1.period/p2.period)^(2//3)  # Julia supports rational numbers! but no longer supports constants in functions
 # Number of times:
-const ntime1 = length(time1)
-const ntime2 = length(time2)
+ntime1 = length(time1)
+ntime2 = length(time2)
 # Compute the coefficients:
 ttv_succinct!(jmax+1,alpha,f1,f2,b,alpha0,b0)  # I need to compute coefficients one higher than jmax
 # Compute TTVs for inner planet (equation 33):

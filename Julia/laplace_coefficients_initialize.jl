@@ -10,8 +10,8 @@ include("laplace_wisdom.jl")
 # This computes the Laplace coefficients via recursion.
 """
 function initialize(jmax::Integer,alpha::Number)
-const nmax=7
-b0=Array(eltype(alpha),nmax,jmax+1) # Array to hold the coefficients
+nmax=7
+b0=Array{eltype(alpha),2}(undef,nmax,jmax+1) # Array to hold the coefficients
 # Compute the highest two Laplace coefficients using Wisdom's series approach:
 for j=0:jmax
   for i=0:nmax-1
