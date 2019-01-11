@@ -41,6 +41,7 @@ Julia$ julia
  _/ |\__'_|_|_|\__'_|  |  Official http://julialang.org/ release  
 |__/                   |  x86_64-apple-darwin13.3.0  
 
+julia> using DelimitedFiles
 julia> data=readdlm("kepler62ef_planets.txt",',',Float64)  
 1x10 Array{Float64,2}:
  3.02306e-5  122.386  -16.5926  -0.00127324  0.0026446  1.67874e-5  267.307  155.466  -0.0025544  0.00117917
@@ -48,9 +49,9 @@ julia> data=readdlm("kepler62ef_planets.txt",',',Float64)
 julia> include("test_ttv.jl")  
 test_ttv (generic function with 1 method)
 
-julia> @time ttv1,ttv2=test_ttv(5,40,20,data);  
+julia> @time ttv1,ttv2=test_ttv(5,40,20,data[1:10]);  
 elapsed time: 0.345652398 seconds (13941760 bytes allocated)  
-julia> @time ttv1,ttv2=test_ttv(5,40,20,data);  
+julia> @time ttv1,ttv2=test_ttv(5,40,20,data[1:10]);  
 elapsed time: 0.000526126 seconds (20404 bytes allocated)
 ```
 
