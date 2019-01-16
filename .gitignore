@@ -1,0 +1,3 @@
+#prevent from accidentally committing these to a repository
+*.jl.cov
+*.jl.mem
