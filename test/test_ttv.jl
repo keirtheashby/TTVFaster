@@ -51,3 +51,9 @@ end
    return ttv1,ttv2
 end
 
+#read in raw data and run the test function
+using DelimitedFiles
+data=readdlm("kepler62ef_planets.txt",',',Float64)
+@time ttv1,ttv2=test_ttv(5,40,20,data[1:10]);
+@time ttv1,ttv2=test_ttv(5,40,20,data[1:10]);
+
